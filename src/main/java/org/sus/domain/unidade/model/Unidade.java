@@ -24,6 +24,7 @@ public class Unidade {
         this.ativo = ativo;
     }
 
+    public Unidade() {}
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;

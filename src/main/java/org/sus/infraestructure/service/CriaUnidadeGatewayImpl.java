@@ -2,6 +2,7 @@ package org.sus.infraestructure.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import org.sus.application.gateway.CriaUnidadeGateway;
 import org.sus.domain.unidade.model.Unidade;
 import org.sus.infraestructure.mapper.UnidadeMapper;
@@ -16,6 +17,7 @@ public class CriaUnidadeGatewayImpl implements CriaUnidadeGateway {
     private UnidadeMapper mapper;
 
     @Override
+    @Transactional
     public void execute(Unidade unidade) {
         repository.persist(mapper.toUnidadeEntity(unidade));
     }
