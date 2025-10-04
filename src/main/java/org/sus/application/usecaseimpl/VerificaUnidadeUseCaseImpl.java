@@ -1,15 +1,13 @@
 package org.sus.application.usecaseimpl;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import org.sus.application.gateway.BuscaUnidadeGateway;
 import org.sus.domain.unidade.exception.UnidadeNaoEncontradaException;
 import org.sus.domain.unidade.model.Unidade;
 import org.sus.domain.unidade.model.UnidadeInfo;
 import org.sus.usecases.VerificaUnidadeUseCase;
 
-import java.util.Optional;
 
-@ApplicationScoped
+
 public class VerificaUnidadeUseCaseImpl implements VerificaUnidadeUseCase {
     public BuscaUnidadeGateway gateway;
 
@@ -17,7 +15,7 @@ public class VerificaUnidadeUseCaseImpl implements VerificaUnidadeUseCase {
         this.gateway = buscaUnidadeGateway;
     }
     @Override
-    public UnidadeInfo verificaUnidade(Long id) {
+    public UnidadeInfo execute(Long id) {
         Unidade unidade = gateway.buscaUnidadeGateway(id).orElseThrow(() ->
                 new UnidadeNaoEncontradaException("Unidade Nao Encontrada")
                 );

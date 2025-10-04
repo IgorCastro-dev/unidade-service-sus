@@ -2,26 +2,48 @@ package org.sus.infraestructure.controller;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.core.Response;
+import org.sus.application.gateway.CriaUnidadeGateway;
+import org.sus.application.gateway.ListaTodasUnidadesGateway;
+import org.sus.domain.unidade.model.Unidade;
 import org.sus.domain.unidade.model.UnidadeInfo;
 import org.sus.infraestructure.dto.response.BaseResponse;
+import org.sus.usecases.CriaUnidadeUseCase;
+import org.sus.usecases.ListaTodasAsUnidadesUseCase;
 import org.sus.usecases.VerificaUnidadeUseCase;
+
+import java.util.List;
 
 @Path("/unidade")
 public class UnidadeController {
 
+    private VerificaUnidadeUseCase verificaUnidadeUseCase;
+    private CriaUnidadeUseCase criaUnidadeUseCase;
+    private ListaTodasAsUnidadesUseCase listaTodasAsUnidadesUseCase;
+
     @Inject
-    private VerificaUnidadeUseCase useCase;
+    public UnidadeController(VerificaUnidadeUseCase verificaUnidadeUseCase, CriaUnidadeUseCase criaUnidadeUseCase, ListaTodasAsUnidadesUseCase listaTodasAsUnidadesUseCase) {
+        this.verificaUnidadeUseCase = verificaUnidadeUseCase;
+        this.criaUnidadeUseCase = criaUnidadeUseCase;
+        this.listaTodasAsUnidadesUseCase = listaTodasAsUnidadesUseCase;
+    }
 
     @GET
     @Path("/{id}")
-    public BaseResponse<UnidadeInfo> verificaUnidadeDisponivel(@PathParam("id") Long id) {
-        return BaseResponse.<UnidadeInfo>builder()
-                .success(true)
-                .message("Informações da unidade retornadas com sucesso")
-                .result(useCase.verificaUnidade(id))
-                .build();
+    public Response verificaUnidadeDisponivel(@PathParam("id") Long id) {
+        return Response.ok(verificaUnidadeUseCase.execute(id)).build();
+    }
+
+    @GET
+    public List<Unidade> listaUnidades() {
+        return listaTodasAsUnidadesUseCase.execute();
+    }
+
+    @POST
+    public String criaUnidade(Unidade unidade) {
+        return criaUnidadeUseCase.execute(unidade);
     }
 }
