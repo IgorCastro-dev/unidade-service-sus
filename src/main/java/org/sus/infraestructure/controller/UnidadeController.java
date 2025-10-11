@@ -1,10 +1,7 @@
 package org.sus.infraestructure.controller;
 
 import jakarta.inject.Inject;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import org.sus.application.gateway.CriaUnidadeGateway;
 import org.sus.application.gateway.ListaTodasUnidadesGateway;
@@ -43,6 +40,8 @@ public class UnidadeController {
     }
 
     @POST
+    @Consumes("application/json")
+    @Produces("application/json")
     public String criaUnidade(Unidade unidade) {
         return criaUnidadeUseCase.execute(unidade);
     }
