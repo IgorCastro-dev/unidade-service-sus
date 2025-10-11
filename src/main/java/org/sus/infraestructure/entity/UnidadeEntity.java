@@ -6,6 +6,8 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.Duration;
+import java.time.LocalTime;
 
 @Data
 @AllArgsConstructor
@@ -23,6 +25,10 @@ public class UnidadeEntity implements Serializable {
     private Long id;
     private String nome;
     private String endereco;
-    private Integer capacidade;
     private Boolean ativo;
+    @Column(name = "horario_abertura")
+    private LocalTime horaAbre;
+    @Column(name = "horario_fechamento")
+    private LocalTime horaFecha;
+    private Duration duracao;
 }

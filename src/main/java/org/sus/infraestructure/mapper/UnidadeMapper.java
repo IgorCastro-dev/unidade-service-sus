@@ -12,8 +12,10 @@ public class UnidadeMapper {
                 unidade.getId(),
                 unidade.getNome(),
                 unidade.getEndereco(),
-                unidade.getCapacidade(),
-                unidade.getAtivo()
+                unidade.getAtivo(),
+                unidade.getHoraAbre(),
+                unidade.getHoraFecha(),
+                unidade.getDuracao()
         );
     }
 
@@ -22,8 +24,10 @@ public class UnidadeMapper {
                 unidadeEntity.getId(),
                 unidadeEntity.getNome(),
                 unidadeEntity.getEndereco(),
-                unidadeEntity.getCapacidade(),
-                unidadeEntity.getAtivo()
+                unidadeEntity.getAtivo(),
+                unidadeEntity.getHoraAbre(),
+                unidadeEntity.getHoraFecha(),
+                unidadeEntity.getDuracao()
         );
     }
 
