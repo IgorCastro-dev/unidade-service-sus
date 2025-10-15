@@ -1,13 +1,14 @@
 package org.sus.infraestructure.controller;
 
 import jakarta.inject.Inject;
-import jakarta.ws.rs.*;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
-import org.sus.application.gateway.CriaUnidadeGateway;
-import org.sus.application.gateway.ListaTodasUnidadesGateway;
 import org.sus.domain.unidade.model.Unidade;
-import org.sus.domain.unidade.model.UnidadeInfo;
-import org.sus.infraestructure.dto.response.BaseResponse;
 import org.sus.usecases.CriaUnidadeUseCase;
 import org.sus.usecases.ListaTodasAsUnidadesUseCase;
 import org.sus.usecases.VerificaUnidadeUseCase;
