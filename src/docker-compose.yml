@@ -12,6 +12,18 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
+  postgres_vaga:
+    image: postgres:15
+    container_name: postgres_vaga
+    restart: always
+    environment:
+      POSTGRES_USER: vaga_user
+      POSTGRES_PASSWORD: vaga_pass
+      POSTGRES_DB: vaga
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data_vaga:/var/lib/postgresql/data
 volumes:
   postgres_data:
+  postgres_data_vaga:
