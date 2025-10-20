@@ -19,6 +19,6 @@ public class VerificaUnidadeUseCaseImpl implements VerificaUnidadeUseCase {
         Unidade unidade = gateway.buscaUnidadeGateway(id).orElseThrow(() ->
                 new UnidadeNaoEncontradaException("Unidade Nao Encontrada")
                 );
-        return UnidadeInfo.criaUnidadeInfo(unidade.getAtivo(), unidade.getHoraAbre(), unidade.getHoraFecha(), unidade.getDuracao());
+        return UnidadeInfo.criaUnidadeInfo(unidade.getNome(), unidade.getAtivo(), unidade.getHoraAbre(), unidade.getHoraFecha(), unidade.getDuracao());
     }
 }

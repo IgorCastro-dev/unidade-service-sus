@@ -24,6 +24,42 @@ services:
       - "5433:5432"
     volumes:
       - postgres_data_vaga:/var/lib/postgresql/data
+  postgres_cidadao:
+    image: postgres:15
+    container_name: postgres_cidadao
+    restart: always
+    environment:
+      POSTGRES_USER: cidadao_user
+      POSTGRES_PASSWORD: cidadao_pass
+      POSTGRES_DB: cidadao
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data_cidadao:/var/lib/postgresql/data
+  sus-kafka:
+    image: apache/kafka:latest
+    container_name: sus-kafka
+    hostname: broker-1
+    ports:
+      - "19092:19092"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:19092,CONTROLLER://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:19092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@broker-1:9093
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+      KAFKA_METADATA_LOG_DIR: /var/lib/kafka/metadata
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+    volumes:
+      - ./kafka-data:/var/lib/kafka/data
+      - ./kafka-metadata:/var/lib/kafka/metadata
 volumes:
   postgres_data:
   postgres_data_vaga:
+  postgres_data_cidadao:
